@@ -1,0 +1,7 @@
+/* iOS VoiceOver, at least, supports a little bit of CSS3 Speech. http://pauljadam.com/demos/css3speech.html */
+
+code { speak-as: literal-punctuation; }
+
+abbr { speak-as: spell-out; }
+
+a[href^="tel:"] { speak-as: digits; }

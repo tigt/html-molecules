@@ -1,0 +1,364 @@
+/* Make sure to autoprefixer this! */
+
+@import "normalize.css";
+
+/*** Typography ***/
+
+main {
+  word-wrap: break-word;
+  /* prevents stuff like URLs blowing out of their containers */
+  hyphens: auto;
+  /* prevents said wrapping from looking terrible; make sure to include your `lang` attribute! */
+}
+
+article p {
+  text-indent: 2em;
+}
+
+article > p:first-child {
+  text-indent: 0;
+  /* the first paragraph in articles shouldn't be indented */
+}
+
+ul,
+li {
+  /* Use hanging punctuation here in article contexts: https://www.smashingmagazine.com/2010/03/css-and-the-future-of-text/#indentation-and-hanging-punctuation */
+}
+
+h1, h2 {
+  text-rendering: optimizeLegibility;
+  /* Don't apply this to most text, too slow and buggy */
+}
+
+strong > strong,
+em > em {
+  text-transform: uppercase; /* you know you're not supposed to use text-transform for acronyms, right? Might as well use it for emphasis, then. */
+}
+
+pre {
+  max-width: 100%;
+  white-space: pre-wrap;
+  /* mobile and preformatted text just don't mix without this */
+  /* Maybe use some text-ident trickery for the wrapped lines */
+}
+
+del {
+  background-color: rgba(255, 0, 0, .2);
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
+ins {
+  background-color: rgba(0, 255, 0, .2);
+  border-bottom: 1px solid green;
+}
+del + ins::before {
+  color: red;
+  content: "^"; /* Should this instead be the U+2038 ‸ caret character? Technically U+2041 ⁁ caret insertion point works better, but it's more esoteric. See https://en.wikipedia.org/wiki/Caret#Proofreading_mark */
+  font-size: smaller;
+  vertical-align: sub;
+}
+
+dfn {
+  font-style: italic; /* Not all browsers do this, hence why normalize.css does. */
+  border: 1px solid; /* Something to immediately set this off as a <dfn> and not, say, <i> or <em> */
+  border-radius: .1em;
+}
+
+abbr > dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+  font-style: normal;
+}
+@supports (text-decoration: dotted underline) {
+  abbr > dfn[title] {
+    border-bottom: none;
+    text-decoration: dotted underline;
+  }
+}
+
+abbr {
+
+}
+
+abbr.acronym {
+  font-variant: small-caps;
+  speak: spell-out;
+}
+
+abbr.numeronym {
+  /* Make sure to use lining numbers or whatever here */
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* Uh oh https://github.com/necolas/normalize.css/issues/493 */
+
+blockquote::before {
+  content: open-quote;
+}
+
+blockquote::after {
+  content: close-quote;
+}
+
+blockquote > footer::before {
+  content: " — ";
+  text-align: right;
+}
+
+kbd > kbd {
+  /* make me look like a keyboard key */
+}
+
+kbd > samp { /* Make this look like a menu option or button somehow */ }
+
+samp > kbd {
+  background: #000;
+  color: #fff;
+}
+
+samp > kbd::before {
+  content: ">";
+  alt: "Echoed:";
+}
+
+code {
+  speak: literal-punctuation;
+}
+
+var {
+  font-family: serif; /* Something to immediately indicate this isn't just italics */
+}
+
+var::after {
+  content: " variable";
+}
+
+code > var {
+  font-family: monospace;
+}
+
+/*** Sectioning content? ***/
+
+address::before {
+  content: "Contact information for this article: ";
+}
+
+/*** Media ***/
+
+img {
+  max-height: 95vh;
+  max-width: 100%;
+  height: auto;
+}
+
+img:not([alt]) {
+  alt: ""; /* Please don't make screen-readers read the URL out loud */
+}
+
+figure {
+  text-align: center;
+}
+
+figure:nth-child(n) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figcaption {
+  font-style: italic;
+  text-align: center;
+}
+
+/*** Links ***/
+
+a {}
+
+a:visited {}
+
+a:hover,
+a:focus {}
+
+a:active {}
+
+a[title]:focus::after {
+  /* Make the title attribute accessible for keyboard users! */
+}
+
+/* http://heydonworks.com/auticons-icon-font/ */
+
+/* Bookmarklet links? Thems would be the javascript: scheme */
+
+a[download]::before {
+  content: /* download icon */;
+}
+
+a[href^="mailto:"] { /* email address */ }
+
+a[href^="tel:"] { /* telephone number */ }
+
+a[target="_blank"] { /* new window */ }
+/* form[target="_blank"] ? */
+
+a:not([href*="mortropolis.com/"]) { /* external link */ }
+
+a[href*=".pdf"] { /* ugh everyone hates PDFs */ }
+
+/* Inline-anchor links... */
+a[rel~="bookmark"][href^="#"] {
+
+}
+
+
+/*** Tooltips ***/
+
+/* HTML structure like this?
+
+<element class="tooltipped">
+  <small class="tooltip"></small>
+</element>
+
+*/
+
+.tooltipped {
+  position: relative;
+}
+
+.tooltipped:after {
+  position: absolute;
+  z-index: 1000000;
+  display: none;
+  padding: 5px 8px;
+  color: #fff;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: pre;
+  content: attr(aria-label);
+  background: rgba(0, 0, 0, .8);
+  border-radius: 3px;
+}
+
+.tooltipped:before {
+  position: absolute;
+  z-index: 1000001;
+  display: none;
+  width: 0;
+  height: 0;
+  color: rgba(0, 0, 0, .8);
+  pointer-events: none;
+  content: "";
+  border: 5px solid transparent
+}
+
+.tooltipped:hover:before,
+.tooltipped:hover:after,
+.tooltipped:active:before,
+.tooltipped:active:after,
+.tooltipped:focus:before,
+.tooltipped:focus:after {
+  display: inline-block;
+}
+
+/* OR... */
+
+[title]::after {
+  content: attr(title);
+  position: absolute;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/*** Inline SVG ***/
+
+svg {
+  overflow: hidden;
+}
+
+text a,
+a text {
+  fill: blue;
+  text-decoration: underline;
+}
+
+text a:visited,
+a:visited text {
+  fill: purple;
+}
+
+text a:active,
+a:active text {
+  fill: red;
+}
+
+/*** Forms ***/
+
+:matches(input, textarea):matches(:invalid, :user-error):not(:focus) {
+  /* Invalid styles go here */
+}
+
+textarea {
+  resize: vertical;
+}
+
+fieldset[disabled]::before {
+  background: rgba(0, 0, 0, .3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-placeholder#Overflow */
+
+/* http://www.heydonworks.com/article/shrinking-button-outlines */
+
+/*** Print styles ***/
+
+@media print {
+  abbr > dfn[title]::after {
+    content: " (" attr(title) ")";
+  }
+
+  article {
+    counter-reset: link-footnotes;
+    display: table-row-group;
+  }
+
+  article a {
+    counter-increment: link-footnotes;
+  }
+
+  article a::after {
+    content: "[" counter(link-footnotes) "]";
+    font-size: smaller;
+    line-height: 1;
+    vertical-align: super;
+  }
+
+  article a::before {
+    display: table-footer-group; /* maybe try something with flexbox, or float/clear. Apparently <ruby>'s display values can work as a hack */
+    color: inherit;
+    content: counter(link-footnotes) ". " attr(title) "; " attr(href);
+  }
+}
+
+/* More stuff here: https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css */
+
+[accesskey]::after {
+  content: "Keyboard shortcut: " attr(accesskey) " ⃣"; /* Unicode ENCLOSING_KEYCAP character */
+  /* In theory, this is a space-separated list of suggestions. In practice, no it isn't. */
+}
+
+:not(:lang(en)) {
+  font-style: italic;
+}

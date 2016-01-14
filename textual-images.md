@@ -109,7 +109,7 @@ If you really wanted to go the extra mile, I would attach a SVG version of the e
 
 ```html
 <img src="./1f389.png"
-     srcset="./1f389.svg 1x"
+     srcset="./1f389.svg"
      draggable="false"
      alt="🎉"
      title="Party popper"
