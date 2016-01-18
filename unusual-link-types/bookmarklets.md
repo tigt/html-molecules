@@ -46,6 +46,10 @@ s.src = 'https://mysite.com/script.js';
 document.body.appendChild(s);
 ```
 
+But don't load libraries twice! https://www.smashingmagazine.com/2010/05/make-your-own-bookmarklets-with-jquery/
+
+Once you're all done, for maximum compatibility, you'll need to escape and URL-encode your snippet. Try [Mr. Cole's tool](https://github.com/mrcoles/bookmarklet).
+
 Be aware that users like to do things such as double-click bookmarklets.
 
 Is it possible to associate an icon with a bookmarklet, by using the default "navigate to returned string" behavior of `javascript:`?
